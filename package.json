@@ -13,6 +13,11 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/edwilliams/css-to-javascript"
-  }
+    "url": "git+https://github.com/edwilliams/css-to-javascript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/edwilliams/css-to-javascript/issues"
+  },
+  "homepage": "https://github.com/edwilliams/css-to-javascript#readme",
+  "dependencies": {}
 }

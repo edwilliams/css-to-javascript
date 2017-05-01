@@ -8,8 +8,6 @@
 $ npm install css-to-javascript --save
 ```
 
-**IMPORTANT: This is currently a spec only repo, logic to follow**
-
 ## Usage
 
 ```

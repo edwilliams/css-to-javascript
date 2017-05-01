@@ -1,3 +1,5 @@
+'use strict';
+
 // RULES:
 // - must be a class (i.e. `.header`, not `#header` or `header` )
 // - must have 2 space indentation
@@ -6,60 +8,53 @@
 
 // TODO: convert keys from hyphen case to camelcase
 
-var camelCased = (str) => str.replace(/-([a-z])/g, (g) => g[1].toUpperCase() )
+function camelCased(str) {
+  return str.replace(/-([a-z])/g, function (g) {
+    return g[1].toUpperCase();
+  });
+};
 
-function convertClass( str ) {
+function convertClass(str) {
 
-  var obj = {}
+  var obj = {};
 
-  var compressed = str.replace(/[\n\r]/g, '')
-  var name = compressed.split('{')[0].split('.')[1].split(' ')[0]
-  var rulesStr = compressed.split('{')[1].split('}')[0]
+  var compressed = str.replace(/[\n\r]/g, '');
+  var name = compressed.split('{')[0].split('.')[1].split(' ')[0];
+  var rulesStr = compressed.split('{')[1].split('}')[0];
 
   // set name
-  obj[name] = {}
+  obj[name] = {};
 
-  var rules = rulesStr.split(';')
+  var rules = rulesStr.split(';');
 
-  rules.forEach((rule) => {
-    var key = rule.split(': ')[0].split('  ')[1]
-    var val = rule.split(': ')[1]
-    if (key) obj[name][ camelCased(key) ] = val
-  })
+  rules.forEach(function (rule) {
+    var key = rule.split(': ')[0].split('  ')[1];
+    var val = rule.split(': ')[1];
+    if (key) obj[name][camelCased(key)] = val;
+  });
 
-  return obj
-
+  return obj;
 }
 
 function numberOfClasses(str) {
-  var compressed = str.replace(/[\n\r]/g, '')
-  return compressed.split('{').length - 1
+  return str.split('{').length - 1;
 }
 
-function csstojs( str ) {
+function csstojs(str) {
 
-  var compressed = str.replace(/[\n\r]/g, '')
-  var obj = {}
+  var compressed = str.replace(/[\n\r]/g, '');
+  var obj = {};
 
-  if ( numberOfClasses(str) === 1 ) return convertClass(str)
+  if (numberOfClasses(str) === 1) return convertClass(str);
 
   // split @ '.' - prepend '.' before conversion
-  compressed.split('.').forEach((classs, i) => {
-    if ( classs.length > 0 ) {
-      obj = Object.assign( obj, convertClass('.' + classs) )
+  compressed.split('.').forEach(function (classs, i) {
+    if (classs.length > 0) {
+      obj = Object.assign(obj, convertClass('.' + classs));
     }
-  })
+  });
 
-  return obj
-
+  return obj;
 }
 
-var str = `
-.header {
-  background: red;
-  border-top: 1px solid blue;
-}`
-
-// console.log( csstojs(str).header.background == 'red' )
-
-module.exports = csstojs
+module.exports = csstojs;

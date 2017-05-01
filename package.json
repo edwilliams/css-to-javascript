@@ -1,6 +1,6 @@
 {
   "name": "css-to-javascript",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "> Convert a CSS class with its styles into a JavaScript object",
   "main": "index.js",
   "scripts": {
